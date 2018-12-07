@@ -1,0 +1,55 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+@import '~vuejs-noty/dist/vuejs-noty.css';
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+input[type=file][name=hello]{
+    display: none !important;
+}
+
+input[name=cmt_box]{
+    border-radius: 21px;
+    background-color: #e9ebee;
+}
+.thumbnail {
+    padding:0px;
+}
+.panel {
+	position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+	position:absolute;
+	top:11px;left:-16px;
+	right:100%;
+	width:0;
+	height:0;
+	display:block;
+	content:" ";
+	border-color:transparent;
+	border-style:solid solid outset;
+	pointer-events:none;
+}
+.panel>.panel-heading:after{
+	border-width:7px;
+	border-right-color:#f7f7f7;
+	margin-top:1px;
+	margin-left:2px;
+}
+.panel>.panel-heading:before{
+	border-right-color:#ddd;
+	border-width:8px;
+}
+.col-md-12 a {
+    color: #444343;
+    text-decoration: none;
+}
+.col-md-12 a:focus, .col-md-12 a:hover {
+    color: #444343;
+    text-decoration: none;
+}

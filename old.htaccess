@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteCond %{HTTP_PORT} =443
+RewriteRule (.*) https://%1/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule (.*) http://%1/$1 [L,R=301]
+</IfModule>
