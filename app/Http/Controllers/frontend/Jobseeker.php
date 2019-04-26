@@ -1096,6 +1096,7 @@ class Jobseeker extends Controller{
 			exit('Directory access is forbidden');
 		}
 		$app = $request->session()->get('jcmUser');
+		//dd($request->all());
 		$this->validate($request, [
 				'firstName' => 'required|max:50',
 				'lastName' => 'required|max:50',
@@ -1108,13 +1109,21 @@ class Jobseeker extends Controller{
 
 		extract(array_map('trim', $request->all()));
 
+
+
 		$isUser = DB::table('jcm_users')->where('userId','<>',$app->userId)->where('email','=',$email)->first();
 		if(count($isUser) > 0){
 			exit('Email alrady exist');
 		}
 
+
+
 		$input = array('firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'phoneNumber' => $phoneNumber, 'city' => $city, 'state' => $state, 'country' => $country);
+
+		//dd($input);
+
 		DB::table('jcm_users')->where('userId','=',$app->userId)->update($input);
+
 
 		if(count(JobCallMe::getUserMeta($app->userId)) > 0){
 			DB::table('jcm_users_meta')->where('userId','=',$app->userId)->update(array('address' => $address));

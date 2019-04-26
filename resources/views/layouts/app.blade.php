@@ -171,16 +171,16 @@ $next = Request::route()->uri;
                 $('html, body').animate({scrollTop: 0}, duration);
                 return false;
             })
-            $('.date-picker').datetimepicker({
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0,
-                format: 'yyyy-mm-dd'
-            });
+            // $('#expiryDatePicker').datetimepicker({
+            //     weekStart: 1,
+            //     todayBtn:  1,
+            //     autoclose: 1,
+            //     todayHighlight: 1,
+            //     startView: 2,
+            //     minView: 2,
+            //     forceParse: 0,
+            //     format: 'dd-mm-yyyy'
+            // });
         });
         $(document).ajaxStart(function() { Pace.restart(); });
         </script>

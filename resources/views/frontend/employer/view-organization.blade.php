@@ -142,12 +142,9 @@ if($company->companyLogo != ''){
                        <h1><a href="">{{ $company->companyName }}</a></h1>
                        <div class="col-md-6 eo-section">
                            <h4>@lang('home.basicinformation')</h4>
-                           <div class="eo-details">
+                          <!--  <div class="eo-details">
                                <span>@lang('home.designation'):</span> HR
-                           </div>
-                           <div class="eo-details">
-                               <span>@lang('home.businesstype'):</span> @lang('home.'.$company->businessType)
-                           </div>
+                           </div>  -->                          
                            <div class="eo-details">
                                <span>@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryName($company->category))
                            </div>
@@ -164,18 +161,23 @@ if($company->companyLogo != ''){
                                <span>@lang('home.website'):</span> <a href="{{ $company->companyWebsite }}">{{ $company->companyWebsite }}</a>
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.establishedin'):</span> @if(app()->getLocale() == "kr")
-                {{ date('Y-m',strtotime($company->companyEstablishDate)) }}
-            @else
-                {{ date('M Y',strtotime($company->companyEstablishDate)) }}
-            @endif
+                               <span>@lang('Facebook'):</span> <a href="{{ $company->companyFb }}">{{ $company->companyFb }}</a>
                            </div>
+                           <div class="eo-details">
+                               <span>@lang('Twitter'):</span> <a href="{{ $company->companyTwitter }}">{{ $company->companyTwitter }}</a>
+                           </div>
+                           <div class="eo-details">
+                               <span>@lang('LinkedIn'):</span> <a href="{{ $company->companyLinkedin }}">{{ $company->companyLinkedin }}</a>
+                           </div>
+                           
                            <div class="eo-details">
                                <span>@lang('home.noemployees'):</span> {{ $company->companyNoOfUsers }}
                            </div>
                        </div>
                        <div class="col-md-6 eo-section">
-                           <a class="btn btn-primary eo-edit-btn" onClick="$('.eo-section').hide(); $('.eo-edit-section').show()"><i class="fa fa-edit"></i> </a>
+                           <a class="btn btn-primary eo-edit-btn" onClick="
+                           $('.eo-section,.conpany-info-sec').hide();
+                           $('.eo-edit-section').show()"><i class="fa fa-edit"></i> </a>
                            <h4>@lang('home.operationhours')</h4>
                            <?php $opHour = json_decode($company->companyOperationalHour,true); ?>
                            <table class="table">
@@ -213,42 +215,18 @@ if($company->companyLogo != ''){
                        </div>
                     </div>   
                        <div class="eo-edit-section">
-                           <form id="pnj-form" action="" method="post" class="organization-form">
-                                <input type="hidden" name="_token" class="token">
+                          <form class="organization-form">
+                   <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                <div class="pnj-form-section">
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.company')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.company') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}" required>
                                        </div>
                                    </div>
-                                  <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.corporatenumber')</label>
-                                       <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control corporatenumber" name="corporatenumber" id="corporatenumber" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->corporatenumber }}">
-                                       </div>
-                                   </div>
-                                     <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.businesstype')</label>
-                                       <div class="col-sm-9 pnj-form-field">
-                                           <select class="form-control select2" name="businessType" required>
-                                                <option value="Sole Proprietorship" {{ $company->businessType == 'Sole Proprietorship' ? 'selected="selected"' : '' }}>@lang('home.Sole Proprietorship')</option>
-                                                <option value="Partnership" {{ $company->businessType == 'Partnership' ? 'selected="selected"' : '' }}>@lang('home.Partnership')</option>
-                                                <option value="SME Pvt. Ltd" {{ $company->businessType == 'SME Pvt. Ltd' ? 'selected="selected"' : '' }}>@lang('home.SME Pvt Ltd')</option>
-                                                <option value="Private Limited Company Pvt Ltd" {{ $company->businessType == 'Private Limited Company Pvt Ltd' ? 'selected="selected"' : '' }}>@lang('home.Private Limited Company Pvt Ltd')</option>
-                                                <option value="Human Public Limited Company Listed" {{ $company->businessType == 'Human Public Limited Company Listed' ? 'selected="selected"' : '' }}>@lang('home.Public Limited Company Listed')</option>
-                                                <option value="Public Limited Company Unlisted" {{ $company->businessType == 'Public Limited Company Unlisted' ? 'selected="selected"' : '' }}>@lang('home.Public Limited Company Unlisted')</option>
-                                                <option value="Nonprofits" {{ $company->businessType == 'Nonprofits' ? 'selected="selected"' : '' }}>@lang('home.Nonprofits')</option>
-                                                <option value="Joint Venture" {{ $company->businessType == 'Joint Venture' ? 'selected="selected"' : '' }}>@lang('home.Joint Venture')</option>
-                                                <option value="Inc Incorporated" {{ $company->businessType == 'Inc Incorporated' ? 'selected="selected"' : '' }}>@lang('home.Inc Incorporated')</option>  
-                                                <option value="LLC Limited Liability Company" {{ $company->businessType == 'LLC Limited Liability Company' ? 'selected="selected"' : '' }}>@lang('home.LLC Limited Liability Company')</option>
-                                                <option value="Government·Pblic·Institutions·Public Corporations" {{ $company->businessType == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
-                                                 
-                                           </select>
-                                       </div>
-                                   </div>
+                                 
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.industry')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.industry') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control select2" name="industry" required>
                                               
@@ -261,13 +239,13 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.address')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.address') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <textarea required class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.country')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.country') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                             <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry" required>
                                                 @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -277,25 +255,26 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.state')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.state') *</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                            <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}" required></select>
+                                            <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}" required> 
+                                            </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.city')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.city') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                             <select class="form-control input-sm select2 job-city companyCity" name="companyCity" data-city="{{ $company->companyCity }}" required></select>
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.phone')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.phone') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="text" class="form-control companyPhoneNumber" name="companyPhoneNumber" id="companyPhoneNumber" placeholder="Phone" value="{{ $company->companyPhoneNumber }}" required>
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.email')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.email') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}">
                                        </div>
@@ -325,146 +304,16 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.noemployees')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.noemployees') *</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="number" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}" required>
                                        </div>
-                                   </div>
-                      </div>
-                    </form>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.industry')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <select class="form-control select2" name="industry" required>
-
-                          @foreach(JobCallMe::getCategories() as $cat)
-                          <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.address')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <textarea required class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.country')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry" required>
-                          @foreach(JobCallMe::getJobCountries() as $cntry)
-                          <option value="{{ $cntry->id }}" {{ $company->companyCountry == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.state')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}" required></select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.city')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <select class="form-control input-sm select2 job-city companyCity" name="companyCity" data-city="{{ $company->companyCity }}" required></select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.phone')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="text" class="form-control companyPhoneNumber" name="companyPhoneNumber" id="companyPhoneNumber" placeholder="Phone" value="{{ $company->companyPhoneNumber }}" required>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.email')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}" required>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.website')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="url" class="form-control companyWebsite" name="companyWebsite" id="companyWebsite" placeholder="https://www.example.com" value="{{ $company->companyWebsite }}">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">Facebook</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="url" class="form-control companyFb" name="companyFb" id="companyFb" placeholder="Facebook" value="{{ $company->companyFb }}">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">Linkedin</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="url" class="form-control companyLinkedin" name="companyLinkedin" id="companyLinkedin" placeholder="Linkedin" value="{{ $company->companyLinkedin }}">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">Twitter</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="url" class="form-control companyTwitter" name="companyTwitter" id="twitter" placeholder="Twitter" value="{{ $company->companyTwitter }}">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.noemployees')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="number" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}" required>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.capital')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="text" class="form-control" name="capital" id="capital" placeholder="@lang('home.capitaltext')" value="{{ $company->capital }}">
-                      </div>
-                    </div>
-
-                   <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.formofbusiness')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                      <select class="form-control input-sm select" name="formofbusiness">
-                        <option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
-                        <option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
-                        <option value="Midsize Business" {{ $company->formofbussiness == 'Midsize Business' ? 'selected="selected"' : '' }}>@lang('home.Midsize Business')</option>
-                        <option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
-                        <option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
-                        <option value="Government·Pblic·Institutions·Public Corporations" {{ $company->formofbussiness == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
-                        <option value="Etc" {{ $company->formofbussiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
-                        </select>
-                      </div>
-                      </div>  
-
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.sales')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input type="text" class="form-control companyNoOfUsers" name="sales" id="sales" placeholder="@lang('home.salestext')" value="{{ $company->sales }}">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-sm-3 col-xs-12">@lang('home.formofbusiness')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <select class="form-control input-sm select job-country" name="formofbusiness">
-                          <option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
-                          <option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
-                          <option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
-                          <option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
-                          <option value="Etc" {{ $company->formofbussiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-3 col-xs-12 control-label">@lang('home.established')</label>
-                      <div class="col-sm-9 pnj-form-field">
-                        <input class="form-control date-pickers companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}" required>
-                      </div>
-                    </div>
-
-                    <hr>
-                    <!--Monday Schedule-->
+                                   </div>                                
+                        </div>                  
+                  
+                  
+                    <!--Monday Schedule-->                 
+                      
                     <div class="form-group">
                       <label class="control-label col-sm-3 col-xs-12">@lang('home.monday')</label>
                       <div class="col-sm-4 pnj-form-field">
@@ -483,9 +332,7 @@ if($company->companyLogo != ''){
                           @endforeach
                         </select>
                       </div>
-                    </div>
-                    <hr>
-
+                    </div>                    
                     <!--Tuesday Schedule-->
                     <div class="form-group">
                       <label class="control-label col-sm-3 col-xs-12">@lang('home.tuesday')</label>
@@ -506,9 +353,7 @@ if($company->companyLogo != ''){
                         </select>
                       </div>
                     </div>
-                    <hr>
-
-                    <!--Wednesday Schedule-->
+                        <!--Wednesday Schedule-->
                     <div class="form-group">
                       <label class="control-label col-sm-3 col-xs-12">@lang('home.wednesday')</label>
                       <div class="col-sm-4 pnj-form-field">
@@ -527,9 +372,7 @@ if($company->companyLogo != ''){
                           @endforeach
                         </select>
                       </div>
-                    </div>
-                    <hr>
-
+                    </div>                    
                     <!--Thursday Schedule-->
                     <div class="form-group">
                       <label class="control-label col-sm-3 col-xs-12">@lang('home.thursday')</label>
@@ -550,8 +393,6 @@ if($company->companyLogo != ''){
                         </select>
                       </div>
                     </div>
-                    <hr>
-
                     <!--Friday Schedule-->
                     <div class="form-group">
                       <label class="control-label col-sm-3 col-xs-12">@lang('home.friday')</label>
@@ -572,8 +413,6 @@ if($company->companyLogo != ''){
                         </select>
                       </div>
                     </div>
-                    <hr>
-
                     <!--Saturday Schedule-->
                     <div class="form-group">
                       <label class="control-label col-sm-3 col-xs-12">@lang('home.saturday')</label>
@@ -594,10 +433,7 @@ if($company->companyLogo != ''){
                         </select>
                       </div>
                     </div>
-                    <hr>
-
-
-                    <!--Sunday Schedule-->
+                     <!--Sunday Schedule-->
                     <div class="form-group">
                       <label class="control-label col-sm-3 col-xs-12">@lang('home.sunday')</label>
                       <div class="col-sm-4 pnj-form-field">
@@ -617,9 +453,17 @@ if($company->companyLogo != ''){
                         </select>
                       </div>
                     </div>
+                    <div class="form-group">
+                       <div class="col-sm-4 pnj-form-field ">
+                         <button class="btn btn-success" id="save-company-detail" type="button"> @lang('home.SAVE')</button>
+                       </div>
+                    </div>
+              </div>
+            </form>
         </div>
       </div>
     </div>
+
       <div class="eo-box eo-about">
         <a class="btn btn-primary r-add-btn hideThis" onClick="$('.eo-about-org').hide(); $('.hideThis').hide();$('.eo-about-editor').show(); "><i class="fa fa-edit"></i> </a>
         <h3 class="eo-about-heading">@lang('home.aboutorganization')</h3>
@@ -627,18 +471,18 @@ if($company->companyLogo != ''){
           <p>{!! $company->companyAbout !!}</p>
         </div>
         <div class="eo-about-editor">
-          <form action="" id="pnj-form" method="post" class="organization-desc-form">
+          <form  id="pnj-form" class="organization-desc-form">
             <input type="hidden" name="_token" class="token">
             <div class="form-group">
               <label class="control-label col-sm-3">&nbsp;</label>
               <div class="col-sm-7 pnj-form-field">
-                <textarea class="form-control tex-editor" name="companyAbout" rows="10" style="resize: vertical;">{!! $company->companyAbout !!}</textarea>
+                <textarea id="aboutComp" class="form-control tex-editor" name="companyAbout" rows="10" style="resize: vertical;">{!! $company->companyAbout !!}</textarea>
               </div>
             </div>
             <div class="col-md-12">
               <div class="row">
                 <div class="col-md-offset-3 col-md-9">
-                  <button type="submit" class="btn btn-primary col-md-3" name="save" style="margin-right:5px">@lang('home.SAVE')</button>
+                  <button type="submit" class="btn btn-primary col-md-3" id="saveAboutCompany" name="save" style="margin-right:5px">@lang('home.SAVE')</button>
                   <button type="button" class="btn btn-default col-md-3" onClick="$('.eo-about-org').show(); $('.hideThis').show();$('.eo-about-editor').hide();">@lang('home.CANCEL')</button>
                 </div>
               </div>
@@ -781,6 +625,7 @@ if($company->companyLogo != ''){
 
 
 <script type="text/javascript">
+
     $('.date-pickers').datetimepicker({
                 format:'yyyy-mm-dd',
                 endDate: '+0d',
@@ -821,6 +666,30 @@ $(document).ready(function(){
         }
       });
     })
+
+
+  $('#save-company-detail').on('click',function(){
+       
+     $.ajax({
+        type: 'post',
+        data:  $('.organization-form').serialize(),
+        url: "{{ url('account/employer/save') }}",
+        success: function(response){
+          $('.eo-section,.conpany-info-sec').show();
+           $('.eo-edit-section').hide()
+          toastr.success('@lang("home.company info update successfully")');
+          location.reload(true);     
+        },
+        error: function(response){
+
+          $('.eo-section,.conpany-info-sec').hide();
+          $('.eo-edit-section').show();             
+        }      
+
+      });
+  });
+
+
 })
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
@@ -928,11 +797,14 @@ tinymce.init({
     toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify bullist numlist outdent indent | link'
 });
 var formOp = 1;
+
+
 $('form.organization-desc-form').submit(function(e){
-    if(formOp == 1){
-        formOp++
-        return false;
-    }
+  // alert("in about"); exit();
+  //   if(formOp == 1){
+  //       formOp++
+  //       return false;
+  //   }
     $('.organization-desc-form .token').val(token);
     $('.organization-desc-form button[name="save"]').prop('disabled',true);
     $.ajax({
@@ -948,13 +820,17 @@ $('form.organization-desc-form').submit(function(e){
         }
     })
     e.preventDefault();
-})
+});
+
+
+
+
 
 $('form.organization-desc-map').submit(function(e){
-    if(formOp == 1){
-        formOp++
-        return false;
-    }
+    // if(formOp == 1){
+    //     formOp++
+    //     return false;
+    // }
     $('.organization-desc-map .token').val(token);
     $('.organization-desc-map button[name="save"]').prop('disabled',true);
     $.ajax({

@@ -23,7 +23,6 @@ if($user->profilePhoto != ''){
     }
     
 ?>
-
 <div id="app">
 <router-view :showdata="{{$app->userId}}" :userimg="'{{$userImage}}'"  :showimg="'{{$app->profilePhoto}}'" :userinfo="'{{$user->firstName}}'"></router-view>
     

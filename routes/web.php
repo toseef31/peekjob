@@ -271,7 +271,11 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('employer/application/candidate/offer','frontend\Employer@offerinterview');
 
     Route::get('employer/organization', 'frontend\Employer@organization');
-    Route::post('employer/organization/save', 'frontend\Employer@savdOrganization');
+
+    Route::post('employer/save','frontend\Employer@savdOrganization');
+
+
+
     Route::post('employer/organization/about', 'frontend\Employer@aboutOrganization');
 	Route::post('employer/organization/map', 'frontend\Employer@mapOrganization');
     Route::post('employer/company/logo', 'frontend\Employer@companyLogo');
@@ -412,9 +416,6 @@ Route::get('skillpaypal', array('as' => 'payment.skillstatus','uses' => 'fronten
 
 Route::post('writepaypal', array('as' => 'addmoney.writepaypal','uses' => 'frontend\ExtraSkills@writePayment',));
 Route::get('writepaypal', array('as' => 'payment.writestatus','uses' => 'frontend\ExtraSkills@writeStatus',));
-
-
-
 Route::get('account/employer/job/share', array('as' => 'addmoney.account/employer/job/share','uses' => 'frontend\Employer@jobupdate',));
 Route::post('employer/update', array('as' => 'addmoney.paypal','uses' => 'frontend\Employer@update',));
 Route::get('employer/update', array('as' => 'payment.edit','uses' => 'frontend\Employer@updateStatus',));

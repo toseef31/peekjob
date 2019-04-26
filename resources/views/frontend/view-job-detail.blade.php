@@ -154,29 +154,8 @@ $dispatch='';
                     <tbody>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td colspan="3">@lang('home.'.JobCallMe::categoryTitle($job->category)) / @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) / @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))</td>                        
-                    </tr>
-					<tr>
-                        <td class="active">@lang('home.jobaddr')</td>
-                        <td colspan="3">{{ $job->jobaddr }}</td>                     
-                    </tr>
-
-
-					
-
-					<tr>
-                        <td class="active">@lang('home.Responsibilities')</td>
-                        <td>{{ $job->responsibilities }}</td>
-                        <td class="active">@lang('home.expptitle')</td>
-                        <td>@lang('home.'.$job->expptitle)
-							@if($job->expptitle == "")
-							  @lang('home.'.$job->expposition)
-							@else	
-							  &nbsp;|@lang('home.'.$job->expposition)
-							@endif
-						
-						</td>
-                    </tr>
+                        <td colspan="3">@lang('home.'.JobCallMe::categoryTitle($job->category))</td>                        
+                    </tr>					
 					<tr>
 						<td class="active">@lang('home.careerlevel')</td>
                         <td>@lang('home.'.$job->careerLevel)</td>
@@ -330,75 +309,6 @@ $dispatch='';
 				<h4><b>@lang('home.qualification')</b></h4>
                 <p>{!! $job->qualification !!}</p>			
 
-
-
-                <br>
-				<div>
-                  <h4><b>@lang('home.admissionsprocess')</b></h4>
-
-                @if($process != '')
-	                <ul class="jd-rewards" style="margin-bottom: 32px;">
-	                	@foreach( $process as $pro)
-							<li>
-							@if($pro == 'Document Screening')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)						
-							@elseif($pro == 'human nature test')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
-							@elseif($pro == 'Chat')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
-							@elseif($pro == 'Video & Chat')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
-							@elseif($pro == 'First Interview')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
-							@elseif($pro == 'Second Interview')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
-							@elseif($pro == 'Examination for Employment')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
-							@elseif($pro == 'Final Pass')
-								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
-							@else
-								<i class="fa fa-check-circle"></i> {!! $pro !!}
-							@endif
-							
-							</li>
-	                		
-	                	@endforeach
-	                </ul>
-                @endif
-				</div>
-				<br><br>
-				<br><br><br><br class="hidden-lg"><br class="hidden-lg"><br class="hidden-lg">	
-				<div>
-                <h4><b>@lang('home.How to register')<b></h4>
-               
-	                <ul class="jd-rewards">
-	                	
-						@if($job->jobreceipt01 == 'yes')
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.jobreceipt01')</li>
-	                	@endif
-						@if($job->jobreceipt02 == 'yes')
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.jobreceipt02')</li>
-	                	@endif
-						@if($job->jobreceipt07 == 'yes')
-							<li><i class="fa fa-check-circle"></i> @lang('home.jobreceipt07')</li>
-						@endif
-						@if($job->jobreceipt03 == 'yes')
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.jobreceipt03')</li>
-	                	@endif
-						@if($job->jobreceipt04 == 'yes')
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.jobreceipt04')</li>
-	                	@endif
-						@if($job->jobreceipt05 == 'yes')
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.jobreceipt05')</li>
-	                	@endif
-						@if($job->jobreceipt06 == 'yes')
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.jobreceipt06')</li>
-	                	@endif
-
-	                </ul>
-				</div>
-                <br>
-                <br><br><br>
                 <div>
                 <h4><b>@lang('home.rewardsbenefits')</b></h4>
                 @if($benefits != '')
@@ -430,7 +340,7 @@ $dispatch='';
 	                	@endforeach
 	                </ul>
                 @endif
-                </div> -->
+                </div>
                 <br>
               
             </div>

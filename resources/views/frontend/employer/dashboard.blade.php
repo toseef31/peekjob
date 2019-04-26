@@ -83,13 +83,29 @@ if($user->profilePhoto != ''){
                     <!-- <ul class="nav nav-tabs"> -->
 					<ul class="nav nav-tabs">
                        <li class="active" style="width:33.3%">
-                            <a href="#rtj_tab_posted_jobs" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-bars" aria-hidden="true"></i> @lang('home.postedjobs')</a>
+                            <a href="#rtj_tab_posted_jobs" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-bars" aria-hidden="true"></i> @lang('home.postedjobs')
+                         
+                                <span class="badge badge-pill badge-primary">{{sizeof($postedJobs)}}</span>
+                           
+
+                            </a>
                         </li>
                         <li style="width:33.3%">
-                            <a href="#rtj_tab_recent_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-address-book"></i> @lang('home.recentapplicant')</a>
+                            <a href="#rtj_tab_recent_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-address-book"></i> @lang('home.recentapplicant')
+
+                            
+                                <span class="badge badge-pill badge-danger">{{sizeof($applicant)}}</span>
+                           
+
+                            </a>
                         </li>
                         <li style="width:33.3%">
-                            <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i> @lang('home.upcominginterviews') </a>
+                            <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i> @lang('home.upcominginterviews') 
+                                 
+                                <span class="badge badge-pill badge-success">{{sizeof($upcommingInterviews)}}</span>
+                        
+
+                            </a>
                         </li>
                    </ul>
 				</div>

@@ -308,8 +308,7 @@ class Home extends Controller{
 	public function accountRegister(Request $request){
 		if($request->session()->has('jcmUser')){
 			return redirect('account/jobseeker');
-		}
-		
+		}		
 		if($request->isMethod('post')){
 			$this->validate($request,[
 				'email' => 'required|email|unique:jcm_users,email',
@@ -353,7 +352,7 @@ class Home extends Controller{
 			$input['about'] = '';
 			$input['createdTime'] = date('Y-m-d H:i:s');
 			$input['modifiedTime'] = date('Y-m-d H:i:s');
-			
+
 			$userId = DB::table('jcm_users')->insertGetId($input);
 			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
 			extract($request->all());
@@ -363,10 +362,14 @@ class Home extends Controller{
 			DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
 			/* end */
 			$toemail = $input['email'];
+
 			$secidtoview = array('id' => $input['secretId'],'Name' => $input['firstName'],'lastName' => $input['lastName']);
+
+			//dd($toemail); exit();
 			Mail::send('emails.reg',$secidtoview,function($message) use ($toemail) {
 				$message->to($toemail)->subject(trans('home.Account Verification'));
 			});
+			
 			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
 			$request->session()->put('jcmUser', $user);*/
 			$fNotice = trans('home.Please check your email to verify');

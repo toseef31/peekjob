@@ -394,6 +394,7 @@ date_default_timezone_set("Asia/Seoul");
             })
             $('.date-picker').datetimepicker({
                 weekStart: 1,
+                startDate : new Date(),
                 todayBtn:  1,
                 autoclose: 1,
                 todayHighlight: 1,
